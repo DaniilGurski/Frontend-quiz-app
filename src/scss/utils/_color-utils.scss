@@ -1,0 +1,20 @@
+@use "../abstracts/" as *;
+
+/* color utilities */
+.bg-purple { background-color: $clr-purple; }
+.bg-dark-navy { background-color: $clr-dark-navy; }
+.bg-navy { background-color: $clr-navy; }
+.bg-light-navy { background-color: $clr-light-navy; }
+.bg-light-bluish { background-color: $clr-light-bluish; }
+.bg-pure-white { background-color: $clr-pure-white; }
+.bg-green { background-color: $clr-green; }
+.bg-red { background-color: $clr-red; }
+
+.clr-purple { color: $clr-purple; }
+.clr-dark-navy { color: $clr-dark-navy; }
+.clr-navy { color: $clr-navy; }
+.clr-light-navy { color: $clr-light-navy; }
+.clr-light-bluish { color: $clr-light-bluish; }
+.clr-pure-white { color: $clr-pure-white; }
+.clr-green { color: $clr-green; }
+.clr-red { color: $clr-red; }

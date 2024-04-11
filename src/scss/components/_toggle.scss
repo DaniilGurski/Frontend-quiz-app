@@ -1,0 +1,52 @@
+@use "../abstracts/" as *;
+
+
+.toggle {
+    --_track-border-radius: 100rem;
+    --_track-padding: #{em(14)};
+    --_track-width: #{em(48)};
+    --_thumb-width: #{em(14)};
+
+    --_inline-spacing: 40%;
+    
+    @include reset_appearence();
+
+    position: relative;
+
+    width: var(--_track-width);
+    padding-block: var(--_track-padding);
+
+    background-color: $clr-purple;
+    border-radius: var(--_track-border-radius);
+
+    cursor: pointer;
+
+
+    // slider thumb
+    &:before {
+        content: "";
+        display: inline-block;
+        position: absolute;
+        
+        width: var(--_thumb-width);
+        aspect-ratio: 1;
+
+        background-color: $clr-pure-white;
+
+        border-radius: 50%;
+        top: 50%;
+        left: 0;
+
+        transform: translate(var(--_inline-spacing), -50%);
+        transition: transform .2s ease-in-out;
+    }
+
+
+    // move toggle thumb to right and saving spacing
+    &:checked {
+        &:before {
+            transform: translate(calc(var(--_track-width) - var(--_thumb-width) - var(--_inline-spacing)), -50%);
+        }
+    }
+}
+

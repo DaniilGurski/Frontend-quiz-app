@@ -1,0 +1,12 @@
+@use "../abstracts/" as *;
+
+/* typography utilities */
+.fs-display { font-size: $font-size-display; }
+.fs-heading { font-size: $font-size-heading; }
+.fs-larger { font-size: $font-size-larger; }
+.fs-smaller { font-size: $font-size-smaller; }
+.fs-smallest { font-size: $font-size-smallest; }
+
+
+.fw-regular { font-weight: $font-weight-regular; }
+.fw-medium { font-weight: $font-weight-medium; }

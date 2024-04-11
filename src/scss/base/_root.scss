@@ -1,0 +1,6 @@
+@use "../abstracts/" as *;
+
+:root {
+    @include convert_colors();
+    @include convert_typography();
+}

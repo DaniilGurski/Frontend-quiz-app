@@ -1,0 +1,48 @@
+$colors: (
+    "purple": (
+        100: hsl(277, 91%, 56%)
+    ),
+
+    "navy": (
+        300: hsl(216, 25%, 25%),
+        200: hsl(215, 27%, 32%),
+        100: hsl(219, 13%, 44%)
+    ),
+
+
+    "bluish": (
+        300: hsl(216, 47%, 78%)
+    ),
+
+
+    "gray": (
+        100: hsl(220, 37%, 97%)
+    ),
+
+
+    "white": (
+        100: hsl(100, 100%, 100%)
+    ),
+
+
+    "green": (
+        500: hsl(151, 70%, 50%)
+    ),
+
+
+    "red": (
+        600: hsl(0, 82%, 63%)
+    )
+
+
+);
+
+$clr-purple: var(--clr-purple-100);
+$clr-dark-navy: var(--clr-navy-300);
+$clr-navy: var(--clr-navy-200);
+$clr-light-navy: var(--clr-navy-100);  // aca gray navy
+$clr-light-gray: var(--clr-gray-100);
+$clr-light-bluish: var(--clr-bluish-300);
+$clr-pure-white: var(--clr-white-100);
+$clr-green: var(--clr-green-500);
+$clr-red: var(--clr-red-600);

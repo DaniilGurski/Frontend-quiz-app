@@ -1,0 +1,70 @@
+// Based on https://piccalil.li/blog/a-modern-css-reset
+
+
+/* box sizing rules */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+
+/* remove default margin */
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+figure {
+  margin: 0;
+}
+
+
+/* remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
+ul[role='list'],
+ol[role='list'] {
+  list-style: none;
+}
+
+
+/* set core root defaults */
+html {
+    height: 100%;
+
+    &:focus-visible {
+        scroll-behavior: smooth;
+    }
+}
+
+
+/* set core body defaults */
+body {
+  height: 100%;
+  text-rendering: optimizeSpeed;
+}
+
+
+/* reset default link styles */
+a {
+  text-decoration: auto;
+  color: inherit;
+}
+
+
+/* make images easier to work with  */
+img,
+picture {
+  max-width: 100%;
+  display: block;
+}
+
+
+/* inherit fonts for inputs and buttons */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+

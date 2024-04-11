@@ -1,0 +1,25 @@
+@use "../abstracts/" as *;
+
+.quiz-progress {
+    @include reset_appearence();
+    display: block;
+
+    &::-webkit-progress-bar {
+        background-color: $clr-pure-white;
+        padding: rem(6);
+        border-radius: 100rem;
+
+    }
+
+    &::-webkit-progress-value {
+        background-color: $clr-purple;
+        border-radius: inherit;
+    }
+
+
+    &::-moz-progress-bar {
+        background-color: $clr-pure-white;
+        padding: rem(6);
+        border-radius: 100rem;
+    }
+}

@@ -1,0 +1,90 @@
+@use "colors"    as *;
+@use "typography" as *;
+@use "functions" as *;
+@use "sizes" as *;
+@use "breakpoints" as *;
+
+
+// Add min-width media query
+@mixin mq-desktop($breakpoint: 720) {
+    @media (min-width: em($breakpoint)) {
+        @content;
+    }
+}
+
+
+// Convert color map either into css custom properties
+@mixin convert_colors() {
+    $color-map: $colors;
+
+    @each $role, $shades in $color-map {
+
+        @each $lightness, $color in $shades {
+            --clr-#{$role}-#{$lightness}: #{$color};
+        }
+    }
+}
+
+
+// Convert map with typography related values either into css custom properties 
+@mixin convert_typography() {
+    $typeography-map: $type;
+    
+    @each $key, $map in $typeography-map {
+        @if $key == "typescale" {
+            @each $screen-size, $typescale in $map {
+                
+                @if $screen-size == "large" {
+                    @include mq-desktop($breakpoint) {
+                        @each $scale, $value in $typescale {
+                            --fs-#{$scale}: #{$value};
+                        }
+                    }
+
+                } @else {
+                    @each $scale, $value in $typescale {
+                        --fs-#{$scale}: #{$value};
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+// Quick access to gap proprety for different situations
+@mixin flex($gap: 1rem) {
+    display: flex;
+    gap: $gap;
+}
+
+
+@mixin grid($gap: 1rem) {
+    display: grid;
+    gap: $gap;
+}
+
+
+// Basic list 
+@mixin list($row: "false", $item-gap: 1rem, $off-markers: "false") {
+    margin: 0;
+    padding: 0;
+
+    @if $row == "true" {
+        @include flex($item-gap);
+    } @else {
+        @include grid($item-gap);
+    }
+
+    @if $off-markers == "true" {
+        list-style-type: none;
+    }
+}
+
+
+// Set appearence to none for custom styling
+@mixin reset_appearence() {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}

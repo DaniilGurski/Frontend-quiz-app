@@ -1,0 +1,23 @@
+@use "../abstracts/" as *;
+
+/* reset default heading typography styles */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font: inherit;
+}
+
+
+/* larger line height for paragraphs */
+p {
+    line-height: 1.5;
+}
+
+
+h1 {
+    color: $clr-dark-navy;
+    font-size: $font-size-heading;
+}

@@ -1,0 +1,10 @@
+@use "../abstracts/" as *;
+
+/* container */
+.container {
+    @include grid(2.5rem);
+
+    width: min(90%, rem(1160));
+    padding-inline: rem(12);
+    margin-inline: auto;
+}

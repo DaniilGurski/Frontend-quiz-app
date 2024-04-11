@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="icon" type="image/png" sizes="32x32" href="dist/img/favicon-32x32.png">
+
+  <link rel="stylesheet" href="dist/css/style.css">
+  
+  <title>Frontend Mentor | Frontend quiz app</title>
+</head>
+<body>
+
+  <div class="container">
+    <header class="header">
+      <div class="header__quiz-topic"> 
+      </div>
+
+      <div class="header__toggle">
+        <span class="header__toggle-icon"></span>
+
+        <input class="toggle header__theme-toggle" type="checkbox" id="theme-toggle" aria-label="change to dark theme"> 
+
+        <span class="header__toggle-icon"></span>
+      </div>
+    </header>
+
+    <main class="main">
+      <article class="quiz-menu">
+        <header class="quiz-menu__header | grid">
+          <h1>   
+            Welcome to the <span class="fw-medium">Frontend Quiz!</span>
+          </h1>
+
+          <p class="small-text"> Pick a subject to get started. </p>
+        </header>
+
+        <ul class="option-list"> 
+          <li>
+            <label class="option">
+              <input class="visually-hidden" type="radio" name="option-check" id="">
+
+              <div class="option__main">
+                  <img class="topic-icon" src="dist/img/icon-html.svg" alt="" data-icon="html">
+                  <p> HTML </p>
+              </div>
+
+              <img class="option__state-indicator hidden" src="dist/img/" alt="" srcset="">
+            </label>
+          </li>
+          <li>
+            <label class="option">
+              <input class="visually-hidden" type="radio" name="option-check" id="">
+
+              <div class="option__main">
+                  <img class="topic-icon" src="dist/img/icon-css.svg" alt="" data-icon="css">
+                  <p> CSS </p>
+              </div>
+            </label>
+          </li>
+          <li>
+            <label class="option">
+              <input class="visually-hidden" type="radio" name="option-check" id="">
+
+              <div class="option__main">
+                  <img class="topic-icon" src="dist/img/icon-js.svg" alt="" data-icon="js">
+                  <p> JavaScript </p>
+              </div>
+            </label>
+          </li>
+          <li>
+            <label class="option">
+              <input class="visually-hidden" type="radio" name="option-check" id="">
+
+              <div class="option__main">
+                  <img class="topic-icon" src="dist/img/icon-accessibility.svg" alt="" data-icon="accessibility">
+                  <p> Accessibility </p>
+              </div>
+            </label>
+          </li>
+        </ul>
+      </article>
+    </main>
+  </div>
+  <!-- 
+  Welcome to the Frontend Quiz!
+  Pick a subject to get started.
+
+  HTML
+  CSS
+  JavaScript
+  Accessibility
+
+  Question [number] of 10
+
+  A
+  B
+  C
+  D
+
+  Submit answer
+
+
+  Quiz completed
+  You scored...
+
+  out of 10 
+  -->
+</div>
+</body>
+</html>

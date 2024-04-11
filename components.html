@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Components</title>
+
+    <link rel="stylesheet" href="dist/css/style.css">
+</head>
+<body>
+    <h1 class="fs-l"> Components </h1>
+
+    <div class="grid">
+        <div>
+            <input class="toggle" id="mode-switch" type="checkbox" aria-label="change to dark mode">
+        </div>
+
+        <div class="grid">
+            <label class="option">
+                <input class="visually-hidden" type="radio" name="option-check" id="">
+
+                <div class="option__main">
+                    <div class="option__icon">
+                        A
+                    </div>
+                    <p> Option </p>
+                </div>
+
+                <img class="option__state-indicator hidden" src="dist/img/" alt="" srcset="">
+            </label>
+            
+            <label class="option">
+                <input class="visually-hidden" type="radio" name="option-check" id="">
+
+                <div class="option__main">
+                    <div class="option__icon">
+                        A
+                    </div>
+                    <p> Option </p>
+                </div>
+
+                <img class="option__state-indicator hidden" src="dist/img/" alt="" srcset="">
+            </label>
+        </div>
+
+        <button class="button"> Button </button>
+
+        
+        <progress class="quiz-progress" id="quiz-progress" value="6" max="8">
+        </progress>
+    </div>
+</body>
+</html>

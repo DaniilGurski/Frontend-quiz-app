@@ -1,0 +1,22 @@
+@use "../abstracts/" as *;
+
+/* buttons */
+.button {
+    width: min(rem(528), 85%);
+    padding: 1.25rem 4rem;
+
+    background-color: $clr-purple;
+    color: $clr-pure-white;
+    box-shadow: 0px 0px 14px 0px hsla(220, 29%, 66%, 50%);
+
+    border: none;
+    border-radius: rem(24);
+
+    font-weight: $font-weight-medium;
+
+    cursor: pointer;
+
+    &:hover {
+        background-color: hsl(277, 91%, 70%);
+    }
+}

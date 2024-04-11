@@ -1,0 +1,35 @@
+@use "sizes" as *;
+@use "functions" as *;
+
+$primary-font-family: "Rubik", "sans-serif";
+
+$font-weight-regular: 400;
+$font-weight-medium: 500;
+
+$type: (
+    typescale: (
+        small: (
+            600: rem(88),
+            500: rem(40),
+            400: rem(20),
+            300: rem(18),
+            200: rem(18),
+            100: rem(14)
+        ),
+        large : (
+            600: rem(144),
+            500: rem(64),
+            400: rem(36),
+            300: rem(28),
+            200: rem(24),
+            100: rem(20)
+        )
+    )
+);
+
+$font-size-display: var(--fs-600);      // heading display size
+$font-size-heading: var(--fs-500);      // heading L size
+$font-size-larger: var(--fs-400);       // heading M size
+$font-size-base: var(--fs-300);         // heading S size
+$font-size-smaller: var(--fs-200);      
+$font-size-smallest: var(--fs-100);

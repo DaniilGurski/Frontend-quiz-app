@@ -1,0 +1,28 @@
+@use "../abstracts/" as *;
+
+$icon-background-colors: (
+    "html": hsl(22, 100%, 96%),
+    "css" : hsl(151, 88%, 94%),
+    "js": hsl(225, 100%, 96%),
+    "accessibility": hsl(278, 100%, 95%)
+);
+
+.topic-icon {
+    width: 3.5rem;
+    aspect-ratio: 1;
+    padding: rem(10);
+    border-radius: rem(12);
+
+    &[data-icon=html] {
+        background: map-get($icon-background-colors, "html");
+    }
+    &[data-icon=css] {
+        background: map-get($icon-background-colors, "css");
+    }
+    &[data-icon=js] {
+        background: map-get($icon-background-colors, "js");
+    }
+    &[data-icon=accessibility] {
+        background: map-get($icon-background-colors, "accessibility");
+    }
+}

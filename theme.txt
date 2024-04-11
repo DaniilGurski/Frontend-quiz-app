@@ -1,0 +1,10 @@
+Things changing colors on different themes: 
+
+body background [light gray => dark navy]
+icons (fill color) 
+option background color (for options with visual colors) [pure white => navy]
+body text color [dark navy => pure white]
+small text [gray navy => light bluish]
+
+
+

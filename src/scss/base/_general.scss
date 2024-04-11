@@ -1,0 +1,30 @@
+@use "../abstracts/" as *;
+
+/* general */
+body {
+    background: $clr-light-gray;
+    background-image: url("/dist/img/pattern-background-mobile-light.svg");
+    background-repeat: no-repeat;
+    background-size: contain;
+
+    color: $clr-dark-navy;
+    font-family: $primary-font-family;
+    font-size: $font-size-base;
+}
+
+
+.quiz-menu {
+    @include grid(rem(40));
+}
+
+
+.option-list {
+    @include list($off-markers: "true");
+}
+
+
+.small-text {
+    font-size: $font-size-smallest;
+    color: $clr-light-navy; 
+    font-style: italic;
+}

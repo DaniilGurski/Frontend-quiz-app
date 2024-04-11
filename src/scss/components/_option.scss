@@ -1,0 +1,86 @@
+@use "../abstracts/" as *;
+
+// change in dark mode: bg color, text color
+.option {
+    --_option-bg-color: var(--option-bg-color, #{$clr-pure-white});
+    --_option-padding: 0.75em;
+    --_icon-bg-color: var(--icon-bg-color, #{$clr-light-gray});
+    --_icon-text-color: var(--icon-text-color, currentColor);
+
+    @include flex();
+    justify-content: space-between;
+    align-items: center;
+
+    width: min(50rem, 100%);
+    padding: var(--_option-padding);
+
+    background-color: var(--_option-bg-color);
+    color: $clr-dark-navy;
+    box-shadow: 0px 0px 14px 0px hsla(220, 29%, 66%, 50%);
+
+    border-radius: rem(24);
+
+    font-weight: $font-weight-medium;
+
+    outline: 5px solid transparent;
+
+    cursor: pointer;
+
+    // apply hover effect for UNCHECKED, UNDISABLED options
+    &:not(:has(:checked, :disabled)):hover {
+        --icon-text-color: #{$clr-purple};
+        --icon-bg-color: hsl(278, 100%, 95%);
+    }
+
+
+    // TODO: create a mixin for outline ? 
+    // active option
+    &:has(:checked) {
+        --icon-bg-color: #{$clr-purple};
+        --icon-text-color: #{$clr-pure-white};
+        outline-color: $clr-purple;
+    }
+
+
+    // mark with green if picked correctly
+    &--picked-correctly {
+        --icon-bg-color: #{$clr-green};
+        --icon-text-color: #{$clr-pure-white};
+        outline-color: $clr-green;
+    }
+
+
+    // mark with red if picked incorrectly
+    &--picked-incorrectly {
+        --icon-bg-color: #{$clr-red};
+        --icon-text-color: #{$clr-pure-white};
+        outline-color: $clr-red;
+    }
+
+
+    // TODO: make width smaller on desktops so padding is not that large ? 
+    &__alternative {
+        display: grid;
+        place-items: center;
+
+        width: 3em;
+        padding: 0.75rem;
+        aspect-ratio: 1;
+
+        color: var(--_icon-text-color);
+        background-color: var(--_icon-bg-color);
+        
+        border-radius: rem(12);
+    }
+
+
+    &__main {
+        @include flex(1em);
+        align-items: center;
+    }
+
+
+    &__state-indicator {
+        width: 2em;
+    }
+}

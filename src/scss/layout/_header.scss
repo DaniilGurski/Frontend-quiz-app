@@ -1,0 +1,41 @@
+@use "../abstracts/" as *;
+
+/* HEADER */
+.header {
+    display: flex;
+    justify-content: space-between;
+
+    padding-block: 1rem;
+
+
+    &__quiz-topic {
+        @include flex();
+        align-items: center;
+
+        font-weight: $font-weight-medium;
+    }
+
+    
+    &__toggle {
+        @include flex(rem(8));
+        align-items: center;
+    }
+
+
+    &__toggle-icon {
+        width: rem(20);
+        aspect-ratio: 1;
+        
+        &:first-child {
+            background: url("/dist/img/icon-sun-dark.svg");
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+    
+        &:last-child {
+            background: url("/dist/img/icon-moon-dark.svg");
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+    }
+}
