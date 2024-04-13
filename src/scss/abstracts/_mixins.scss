@@ -6,7 +6,7 @@
 
 
 // Add min-width media query
-@mixin mq-desktop($breakpoint: 720) {
+@mixin media-query($breakpoint: 768) {
     @media (min-width: em($breakpoint)) {
         @content;
     }
@@ -35,7 +35,7 @@
             @each $screen-size, $typescale in $map {
                 
                 @if $screen-size == "large" {
-                    @include mq-desktop($breakpoint) {
+                    @include media-query($medium-screen-size) {
                         @each $scale, $value in $typescale {
                             --fs-#{$scale}: #{$value};
                         }

@@ -109,7 +109,7 @@ h1 {
   --fs-200: 1.125rem;
   --fs-100: 0.875rem;
 }
-@media (min-width: 37.5em) {
+@media (min-width: 48em) {
   :root {
     --fs-600: 9rem;
     --fs-500: 4rem;
@@ -131,9 +131,27 @@ body {
   font-size: var(--fs-300);
 }
 
-.quiz-menu {
+.quiz-menu__header {
+  align-content: start;
+}
+
+.quiz-main__header {
   display: grid;
-  gap: 2.5rem;
+  gap: 1.5rem;
+  align-content: space-between;
+}
+.quiz-main__header > :first-child {
+  display: grid;
+  gap: 0.75rem;
+}
+@media (min-width: 48em) {
+  .quiz-main__header {
+    height: 80%;
+    gap: 2.5rem;
+  }
+  .quiz-main__header > :first-child {
+    gap: 1.6875rem;
+  }
 }
 
 .option-list {
@@ -142,6 +160,20 @@ body {
   display: grid;
   gap: 1rem;
   list-style-type: none;
+}
+
+.option-container {
+  --_option-gap: var(--option-gap, 1em);
+  margin-block: var(--_layout-gap);
+}
+.option-container * {
+  display: grid;
+  gap: var(--_option-gap);
+}
+@media (min-width: 48em) {
+  .option-container {
+    --option-gap: 1.5em;
+  }
 }
 
 .small-text {
@@ -184,11 +216,25 @@ body {
 
 /* FOOTER */
 /* MAIN */
+.main {
+  --_layout-gap: var(--layout-gap, 2.5rem);
+}
+.main > article:not(.none) {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(30rem, 100%), 1fr));
+  column-gap: 10rem;
+}
+@media (min-width: 48em) {
+  .main {
+    --layout-gap: 4rem;
+  }
+}
+
 /* container */
 .container {
   display: grid;
   gap: 2.5rem;
-  width: min(90%, 72.5rem);
+  width: min(90%, 120rem);
   padding-inline: 0.75rem;
   margin-inline: auto;
 }
@@ -318,8 +364,8 @@ body {
 
 /* buttons */
 .button {
-  width: min(33rem, 85%);
-  padding: 1.25rem 4rem;
+  width: min(35.25em, 100%);
+  padding: 2rem 4rem;
   background-color: var(--clr-purple-100);
   color: var(--clr-white-100);
   box-shadow: 0px 0px 14px 0px hsla(220, 29%, 66%, 0.5);
@@ -374,7 +420,7 @@ body {
   gap: 1rem;
   justify-content: space-between;
   align-items: center;
-  width: min(50rem, 100%);
+  width: min(35.25em, 100%);
   padding: var(--_option-padding);
   background-color: var(--_option-bg-color);
   color: var(--clr-navy-300);
@@ -427,6 +473,7 @@ body {
   -webkit-appearance: none;
   -moz-appearance: none;
   display: block;
+  width: 100%;
 }
 .quiz-progress::-webkit-progress-bar {
   background-color: var(--clr-white-100);

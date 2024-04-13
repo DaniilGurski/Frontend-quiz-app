@@ -3,6 +3,7 @@
 .quiz-progress {
     @include reset_appearence();
     display: block;
+    width: 100%;
 
     &::-webkit-progress-bar {
         background-color: $clr-pure-white;

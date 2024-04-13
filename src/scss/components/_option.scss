@@ -11,7 +11,8 @@
     justify-content: space-between;
     align-items: center;
 
-    width: min(50rem, 100%);
+    width: min(em(564), 100%);
+
     padding: var(--_option-padding);
 
     background-color: var(--_option-bg-color);

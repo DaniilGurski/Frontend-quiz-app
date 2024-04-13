@@ -1,1 +1,7 @@
-$breakpoint: 600;
+$breakpoints: (
+    medium: 768,
+    large: 1274
+);
+
+$medium-screen-size: map-get($breakpoints, medium);
+$large-screen-size: map-get($breakpoints, large);

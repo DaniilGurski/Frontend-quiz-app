@@ -27,7 +27,7 @@
     </header>
 
     <main class="main">
-      <article class="quiz-menu">
+      <article class="quiz-menu | none">
         <header class="quiz-menu__header | grid">
           <h1>   
             Welcome to the <span class="fw-medium">Frontend Quiz!</span>
@@ -35,51 +35,124 @@
 
           <p class="small-text"> Pick a subject to get started. </p>
         </header>
+        
+        <div class="option-container">
+          <ul class="option-list"> 
+            <li>
+              <label class="option">
+                <input class="visually-hidden" type="radio" name="option-check" id="">
 
-        <ul class="option-list"> 
-          <li>
-            <label class="option">
-              <input class="visually-hidden" type="radio" name="option-check" id="">
+                <div class="option__main">
+                    <img class="topic-icon" src="dist/img/icon-html.svg" alt="" data-icon="html">
+                    <p> HTML </p>
+                </div>
 
-              <div class="option__main">
-                  <img class="topic-icon" src="dist/img/icon-html.svg" alt="" data-icon="html">
-                  <p> HTML </p>
-              </div>
+                <img class="option__state-indicator hidden" src="dist/img/" alt="" srcset="">
+              </label>
+            </li>
+            <li>
+              <label class="option">
+                <input class="visually-hidden" type="radio" name="option-check" id="">
 
-              <img class="option__state-indicator hidden" src="dist/img/" alt="" srcset="">
-            </label>
-          </li>
-          <li>
-            <label class="option">
-              <input class="visually-hidden" type="radio" name="option-check" id="">
+                <div class="option__main">
+                    <img class="topic-icon" src="dist/img/icon-css.svg" alt="" data-icon="css">
+                    <p> CSS </p>
+                </div>
+              </label>
+            </li>
+            <li>
+              <label class="option">
+                <input class="visually-hidden" type="radio" name="option-check" id="">
 
-              <div class="option__main">
-                  <img class="topic-icon" src="dist/img/icon-css.svg" alt="" data-icon="css">
-                  <p> CSS </p>
-              </div>
-            </label>
-          </li>
-          <li>
-            <label class="option">
-              <input class="visually-hidden" type="radio" name="option-check" id="">
+                <div class="option__main">
+                    <img class="topic-icon" src="dist/img/icon-js.svg" alt="" data-icon="js">
+                    <p> JavaScript </p>
+                </div>
+              </label>
+            </li>
+            <li>
+              <label class="option">
+                <input class="visually-hidden" type="radio" name="option-check" id="">
 
-              <div class="option__main">
-                  <img class="topic-icon" src="dist/img/icon-js.svg" alt="" data-icon="js">
-                  <p> JavaScript </p>
-              </div>
-            </label>
-          </li>
-          <li>
-            <label class="option">
-              <input class="visually-hidden" type="radio" name="option-check" id="">
+                <div class="option__main">
+                    <img class="topic-icon" src="dist/img/icon-accessibility.svg" alt="" data-icon="accessibility">
+                    <p> Accessibility </p>
+                </div>
+              </label>
+            </li>
+          </ul>
+        </div>
+      </article>
 
-              <div class="option__main">
-                  <img class="topic-icon" src="dist/img/icon-accessibility.svg" alt="" data-icon="accessibility">
-                  <p> Accessibility </p>
-              </div>
-            </label>
-          </li>
-        </ul>
+      <article class="quiz-main">
+        <header class="quiz-main__header">
+          <div>
+            <p class="quiz-main__questions-left | small-text"> Question <span id="question-index">1</span> of 10</p>
+            <p class="quiz-main__question | fs-larger | fw-medium">
+              Which of these color contrast ratios defines the minimum WCAG 2.1
+              Level AA requirement for normal text?
+            </p>
+          </div>
+
+          <progress class="quiz-progress" id="quiz-progress" value="6" max="8">
+          </progress>
+        </header>
+
+        <div class="option-container">
+          <div>
+            <ul class="option-list"> 
+              <li>
+                <label class="option">
+                  <input class="visually-hidden" type="radio" name="option-check" id="">
+
+                  <div class="option__main">
+                    <span class="option__alternative"> A </span>
+                    <p> Option </p>
+                  </div>
+
+                  <img class="option__state-indicator hidden" src="dist/img/" alt="" srcset="">
+                </label>
+              </li>
+              <li>
+                <label class="option">
+                  <input class="visually-hidden" type="radio" name="option-check" id="">
+
+                  <div class="option__main">
+                    <span class="option__alternative"> B </span>
+                    <p> Option </p>
+                  </div>
+
+                  <img class="option__state-indicator hidden" src="dist/img/" alt="" srcset="">
+                </label>
+              </li>
+              <li>
+                <label class="option">
+                  <input class="visually-hidden" type="radio" name="option-check" id="">
+
+                  <div class="option__main">
+                    <span class="option__alternative"> C </span>
+                    <p> Option </p>
+                  </div>
+
+                  <img class="option__state-indicator hidden" src="dist/img/" alt="" srcset="">
+                </label>
+              </li>
+              <li>
+                <label class="option">
+                  <input class="visually-hidden" type="radio" name="option-check" id="">
+
+                  <div class="option__main">
+                    <span class="option__alternative"> D </span>
+                    <p> Option </p>
+                  </div>
+
+                  <img class="option__state-indicator hidden" src="dist/img/" alt="" srcset="">
+                </label>
+              </li>
+            </ul>
+            <button class="button">Submit Answer</button>
+            </div>
+        </div>
       </article>
     </main>
   </div>

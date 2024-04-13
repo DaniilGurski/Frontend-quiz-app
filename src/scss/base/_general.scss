@@ -14,7 +14,33 @@ body {
 
 
 .quiz-menu {
-    @include grid(rem(40));
+    &__header {
+        align-content: start;
+    }
+}
+
+
+.quiz-main {
+    &__header {
+        @include grid(rem(24));
+        align-content: space-between;
+    }
+
+    // div container with questions left span and question itself
+    &__header > :first-child {
+        @include grid(rem(12));
+    }
+
+    @include media-query($medium-screen-size) {
+        &__header {
+            height: 80%;
+            gap: rem(40);
+        }
+
+        &__header > :first-child {
+            gap: rem(27);
+        }
+    }
 }
 
 
@@ -23,6 +49,22 @@ body {
 }
 
 
+.option-container {
+    --_option-gap: var(--option-gap, #{em(16)});
+    margin-block: var(--_layout-gap);
+
+    // add equal spacing between each item inside option container
+    & * {
+        @include grid(var(--_option-gap));
+    }
+
+    @include media-query($medium-screen-size) {
+        --option-gap: #{em(24)};
+    }
+}
+
+
+// TODO: move to seperate file like "text-utils" ?
 .small-text {
     font-size: $font-size-smallest;
     color: $clr-light-navy; 

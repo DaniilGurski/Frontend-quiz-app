@@ -2,8 +2,8 @@
 
 /* buttons */
 .button {
-    width: min(rem(528), 85%);
-    padding: 1.25rem 4rem;
+    width: min(em(564), 100%);
+    padding: 2rem 4rem;
 
     background-color: $clr-purple;
     color: $clr-pure-white;

@@ -1,3 +1,18 @@
 @use "../abstracts/" as *;
 
 /* MAIN */
+.main {
+    // spacing between header and options 
+    --_layout-gap: var(--layout-gap, #{rem(40)});
+
+    & > article:not(.none) {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(min(30rem, 100%), 1fr));
+        column-gap: 10rem;
+    }
+
+
+    @include media-query($medium-screen-size) {
+        --layout-gap: #{rem(64)};
+    }
+}
