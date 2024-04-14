@@ -4,6 +4,7 @@
 .option {
     --_option-bg-color: var(--option-bg-color, #{$clr-pure-white});
     --_option-padding: 0.75em;
+    --_option-box-shadow-color: var(--option-box-shadow-color, hsla(220, 29%, 66%, 50%));
     --_icon-bg-color: var(--icon-bg-color, #{$clr-light-gray});
     --_icon-text-color: var(--icon-text-color, currentColor);
 
@@ -17,7 +18,7 @@
 
     background-color: var(--_option-bg-color);
     color: $clr-dark-navy;
-    box-shadow: 0px 0px 14px 0px hsla(220, 29%, 66%, 50%);
+    box-shadow: 0px 0px 6px 0px var(--_option-box-shadow-color);
 
     border-radius: rem(24);
 
@@ -27,6 +28,13 @@
 
     cursor: pointer;
 
+    .dark-mode & {
+        --option-bg-color: #{$clr-navy};
+        --option-box-shadow-color: #{$clr-navy};
+        --icon-text-color: #{$clr-light-navy};
+        color: currentColor;
+    }
+    
     // apply hover effect for UNCHECKED, UNDISABLED options
     &:not(:has(:checked, :disabled)):hover {
         --icon-text-color: #{$clr-purple};
@@ -60,12 +68,12 @@
 
 
     // TODO: make width smaller on desktops so padding is not that large ? 
-    &__alternative {
+    &__marker {
         display: grid;
         place-items: center;
 
-        width: 3em;
-        padding: 0.75rem;
+        width: 2.5em;
+        padding: 0.25rem;
         aspect-ratio: 1;
 
         color: var(--_icon-text-color);

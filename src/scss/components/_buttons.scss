@@ -2,12 +2,13 @@
 
 /* buttons */
 .button {
+    --_button-box-shadow-color: var(--button-box-shadow-color, hsla(220, 29%, 66%, 50%));
     width: min(em(564), 100%);
     padding: 2rem 4rem;
 
     background-color: $clr-purple;
     color: $clr-pure-white;
-    box-shadow: 0px 0px 14px 0px hsla(220, 29%, 66%, 50%);
+    box-shadow: 0px 0px 14px 0px var(--_button-box-shadow-color);
 
     border: none;
     border-radius: rem(24);
@@ -18,5 +19,10 @@
 
     &:hover {
         background-color: hsl(277, 91%, 70%);
+    }
+
+
+    .dark-mode & {
+        --_button-box-shadow-color: #{$clr-dark-navy};
     }
 }

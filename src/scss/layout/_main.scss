@@ -8,6 +8,7 @@
     & > article:not(.none) {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(min(30rem, 100%), 1fr));
+        row-gap: var(--_layout-gap);
         column-gap: 10rem;
     }
 

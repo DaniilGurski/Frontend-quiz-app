@@ -1,15 +1,48 @@
 @use "../abstracts/" as *;
 
+
+
 /* general */
 body {
-    background: $clr-light-gray;
+    --_body-background-color: var(--body-background-color, #{$clr-light-gray});
+    --_body-text-color: var(--body-text-color, #{$clr-dark-navy});
+
+    background: var(--_body-background-color);
     background-image: url("/dist/img/pattern-background-mobile-light.svg");
     background-repeat: no-repeat;
-    background-size: contain;
+    background-size: cover;
 
-    color: $clr-dark-navy;
+    color: var(--_body-text-color);
     font-family: $primary-font-family;
     font-size: $font-size-base;
+
+    &.dark-mode {
+        background-image: url("/dist/img/pattern-background-mobile-dark.svg");
+    }
+
+    @include media-query($medium-screen-size) {
+        background-image: url("/dist/img/pattern-background-tablet-light.svg");
+
+        &.dark-mode {
+            background-image: url("/dist/img/pattern-background-tablet-dark.svg");
+        }
+    }
+
+    @include media-query($large-screen-size) {
+        background-image: url("/dist/img/pattern-background-desktop-light.svg");
+
+        &.dark-mode {
+            background-image: url("/dist/img/pattern-background-desktop-dark.svg");
+        }
+    }
+}
+
+
+.dark-mode {
+    --body-background-color: #{$clr-dark-navy};
+    --body-text-color: #{$clr-pure-white};
+
+
 }
 
 
@@ -30,7 +63,7 @@ body {
     &__header > :first-child {
         @include grid(rem(12));
     }
-
+    
     @include media-query($medium-screen-size) {
         &__header {
             height: 80%;
@@ -51,7 +84,6 @@ body {
 
 .option-container {
     --_option-gap: var(--option-gap, #{em(16)});
-    margin-block: var(--_layout-gap);
 
     // add equal spacing between each item inside option container
     & * {
@@ -69,4 +101,8 @@ body {
     font-size: $font-size-smallest;
     color: $clr-light-navy; 
     font-style: italic;
+
+    .dark-mode & {
+        color: $clr-light-bluish;
+    }
 }

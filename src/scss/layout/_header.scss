@@ -2,11 +2,15 @@
 
 /* HEADER */
 .header {
+    --_mode-icon-size: #{rem(20)};
     display: flex;
     justify-content: space-between;
 
     padding-block: 1rem;
 
+    @include media-query($medium-screen-size) {
+        --_mode-icon-size: #{rem(24)};
+    }
 
     &__quiz-topic {
         @include flex();
@@ -23,7 +27,7 @@
 
 
     &__toggle-icon {
-        width: rem(20);
+        width: var(--_mode-icon-size);
         aspect-ratio: 1;
         
         &:first-child {
@@ -36,6 +40,15 @@
             background: url("/dist/img/icon-moon-dark.svg");
             background-repeat: no-repeat;
             background-size: cover;
+        }
+
+        /* light version of mode icons (dark mode)*/ 
+        .dark-mode &:first-child {
+            background: url("/dist/img/icon-sun-light.svg");
+        }
+
+        .dark-mode &:last-child {
+            background: url("/dist/img/icon-moon-light.svg");
         }
     }
 }
