@@ -7,4 +7,8 @@
     width: min(90%, rem(1920));
     padding-inline: rem(12);
     margin-inline: auto;
+
+    @include media-query($medium-screen-size) {
+        gap: rem(99);
+    }
 }

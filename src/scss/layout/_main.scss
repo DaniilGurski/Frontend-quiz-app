@@ -5,6 +5,7 @@
     // spacing between header and options 
     --_layout-gap: var(--layout-gap, #{rem(40)});
 
+    // quiz windows: menu, main and end 
     & > article:not(.none) {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(min(30rem, 100%), 1fr));

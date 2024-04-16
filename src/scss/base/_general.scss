@@ -1,12 +1,17 @@
 @use "../abstracts/" as *;
 
-
-
 /* general */
 body {
     --_body-background-color: var(--body-background-color, #{$clr-light-gray});
     --_body-text-color: var(--body-text-color, #{$clr-dark-navy});
+    --_small-text-color: var(--small-text-color, #{$clr-light-navy});
+    --_primary-color: var(--primary-color, #{$clr-pure-white});
 
+    // TODO: make padding scss map and scss variables ? 
+    --_padding-100: var(--padding-100, #{rem(12)});
+    --_padding-200: var(--padding-200, #{rem(16)});
+    --_padding-300: var(--padding-300, #{rem(32)});
+    
     background: var(--_body-background-color);
     background-image: url("/dist/img/pattern-background-mobile-light.svg");
     background-repeat: no-repeat;
@@ -21,6 +26,9 @@ body {
     }
 
     @include media-query($medium-screen-size) {
+        --padding-200: #{rem(32)};
+        --padding-300: #{rem(48)};
+
         background-image: url("/dist/img/pattern-background-tablet-light.svg");
 
         &.dark-mode {
@@ -29,6 +37,8 @@ body {
     }
 
     @include media-query($large-screen-size) {
+        --padding-100: #{rem(18)};
+
         background-image: url("/dist/img/pattern-background-desktop-light.svg");
 
         &.dark-mode {
@@ -41,8 +51,8 @@ body {
 .dark-mode {
     --body-background-color: #{$clr-dark-navy};
     --body-text-color: #{$clr-pure-white};
-
-
+    --small-text-color: #{$clr-light-bluish};
+    --primary-color: #{$clr-navy};
 }
 
 
@@ -77,6 +87,34 @@ body {
 }
 
 
+.quiz-end {
+    &__results {
+        @include grid(rem(32));
+    }
+    
+    &__score {
+        display: grid;
+        justify-content: center;
+        text-align: center;
+
+        padding: var(--_padding-300);
+        background-color: var(--_primary-color);
+        border-radius: rem(24);
+
+        p:last-of-type {
+            color: var(--_small-text-color);
+        }
+    }
+}
+
+
+.quiz-topic {
+    @include flex();
+    align-items: center;
+    font-weight: $font-weight-medium;
+}
+
+
 .option-list {
     @include list($off-markers: "true");
 }
@@ -99,10 +137,6 @@ body {
 // TODO: move to seperate file like "text-utils" ?
 .small-text {
     font-size: $font-size-smallest;
-    color: $clr-light-navy; 
+    color: var(--_small-text-color);
     font-style: italic;
-
-    .dark-mode & {
-        color: $clr-light-bluish;
-    }
 }
