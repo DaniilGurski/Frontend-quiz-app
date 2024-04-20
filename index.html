@@ -7,6 +7,7 @@
   <link rel="icon" type="image/png" sizes="32x32" href="dist/img/favicon-32x32.png">
 
   <link rel="stylesheet" href="dist/css/style.css">
+  <script src="dist/js/main.min.js" defer></script>
   
   <title>Frontend Mentor | Frontend quiz app</title>
 </head>
@@ -14,9 +15,10 @@
 
   <div class="container">
     <header class="header">
-      <span class="quiz-topic"> 
-        <span>  </span>
-      </span>
+      <div class="quiz-topic"> 
+        <img class="topic-icon" src="" alt="" data-icon="">
+        <span> </span>
+      </div>
 
       <div class="header__toggle">
         <span class="header__toggle-icon"></span>
@@ -28,7 +30,7 @@
     </header>
 
     <main class="main">
-      <article class="quiz-menu ">
+      <article class="quiz-menu |">
         <header class="quiz-menu__header | grid">
           <h1>   
             Welcome to the <span class="fw-medium">Frontend Quiz!</span>
@@ -38,8 +40,8 @@
         </header>
         
         <div class="option-container">
-          <ul class="option-list"> 
-            <li>
+          <ul class="option-list" id="menu-option-list"> 
+            <li data-quiz-option="HTML">
               <label class="option">
                 <input class="visually-hidden" type="radio" name="option-check" id="">
 
@@ -48,10 +50,10 @@
                     <p> HTML </p>
                 </div>
 
-                <img class="option__state-indicator hidden" src="dist/img/" alt="" srcset="">
+                <img class="option__state-indicator hidden" src="" alt="">
               </label>
             </li>
-            <li>
+            <li data-quiz-option="CSS">
               <label class="option">
                 <input class="visually-hidden" type="radio" name="option-check" id="">
 
@@ -61,7 +63,7 @@
                 </div>
               </label>
             </li>
-            <li>
+            <li data-quiz-option="JavaScript">
               <label class="option">
                 <input class="visually-hidden" type="radio" name="option-check" id="">
 
@@ -71,7 +73,7 @@
                 </div>
               </label>
             </li>
-            <li>
+            <li data-quiz-option="Accessibility">
               <label class="option">
                 <input class="visually-hidden" type="radio" name="option-check" id="">
 
@@ -95,7 +97,7 @@
             </p>
           </div>
 
-          <progress class="quiz-progress" id="quiz-progress" value="6" max="8">
+          <progress class="quiz-progress" id="quiz-progress" value="1" max="8">
           </progress>
         </header>
 
@@ -108,7 +110,7 @@
 
                   <div class="option__main">
                     <span class="option__marker"> A </span>
-                    <p> Option </p>
+                    <p data-option-text> Option </p>
                   </div>
 
                   <img class="option__state-indicator hidden" src="dist/img/" alt="">
@@ -120,7 +122,7 @@
 
                   <div class="option__main">
                     <span class="option__marker"> B </span>
-                    <p> Option </p>
+                    <p data-option-text> Option </p>
                   </div>
 
                   <img class="option__state-indicator hidden" src="dist/img/" alt="">
@@ -132,7 +134,7 @@
 
                   <div class="option__main">
                     <span class="option__marker"> C </span>
-                    <p> Option </p>
+                    <p data-option-text> Option </p>
                   </div>
 
                   <img class="option__state-indicator hidden" src="dist/img/" alt="">
@@ -144,7 +146,7 @@
 
                   <div class="option__main">
                     <span class="option__marker"> D </span>
-                    <p> Option </p>
+                    <p data-option-text> Option </p>
                   </div>
 
                   <img class="option__state-indicator hidden" src="dist/img/" alt="">
@@ -161,13 +163,13 @@
 
         <div class="quiz-end__results">
           <div class="quiz-end__score">
-            <span class="quiz-topic">
-              <img class="topic-icon" src="dist/img/icon-accessibility.svg" alt="" data-icon="accessibility">
-              <span> Accessibility </span>
-            </span>
+            <div class="quiz-topic">
+              <img class="topic-icon" src="" alt="" data-icon="">
+              <span>  </span>
+            </div>
 
             <span class="fs-display" id="quiz-score"> [number] </span>
-            <p class="">out of <span id="question-number"> [number] </span> </p>
+            <p>out of <span id="question-number"> [number] </span> </p>
           </div>
 
           <button class="button" id="play-again-btn">Play Again</button>
@@ -175,30 +177,6 @@
       </article>
     </main>
   </div>
-  <!-- 
-  Welcome to the Frontend Quiz!
-  Pick a subject to get started.
-
-  HTML
-  CSS
-  JavaScript
-  Accessibility
-
-  Question [number] of 10
-
-  A
-  B
-  C
-  D
-
-  Submit answer
-
-
-  Quiz completed
-  You scored...
-
-  out of 10 
-  -->
 </div>
 </body>
 </html>
