@@ -35,11 +35,11 @@ function plumberNotify(Errortitle) {
 Сборка JS файлов и минимизация.
 */
 function buildScripts() {
-    return src(`${srcPath}script/**/*.js`, {sourcemaps: true})
+    return src(`${srcPath}js/**/*.js`, {sourcemaps: true})
         .pipe(concat("main.min.js"))
         .pipe(uglify())
 
-        .pipe(dest(`${destPath}script`))
+        .pipe(dest(`${destPath}js`))
 
         .pipe(browserSync.stream())
 }
@@ -109,7 +109,7 @@ function browserSyncServer(done) {
 */
 function watchTasks() {
     watch([`${srcPath}scss/**/*.scss`, "*.html"], buildStyles);
-    watch([`${srcPath}script/**/*.js`], buildScripts).on("change", browserSync.reload);
+    watch([`${srcPath}js/**/*.js`], buildScripts).on("change", browserSync.reload);
 
     watch([`${srcPath}img`], optimizeImages)
     
