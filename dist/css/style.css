@@ -604,4 +604,7 @@ body.dark-mode {
 .topic-icon[data-icon=accessibility] {
   background: hsl(278, 100%, 95%);
 }
+.topic-icon[src=""] {
+  visibility: hidden;
+}
 /*# sourceMappingURL=style.css.map */
