@@ -25,4 +25,8 @@ $icon-background-colors: (
     &[data-icon=accessibility] {
         background: map-get($icon-background-colors, "accessibility");
     }
+
+    &[src=""] {
+        visibility: hidden;
+    }
 }
