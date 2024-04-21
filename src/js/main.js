@@ -6,13 +6,54 @@ const quizEnd        = mainElement.querySelector(".quiz-end");
 const menuOptionList = quizMenu.querySelector(".option-list");
 const mainOptionList = quizMain.querySelector(".option-list");
 const menuOptions    = Array.from(menuOptionList.children);
-const mainOption     = Array.from(mainOptionList.children);
+const mainOptions    = Array.from(mainOptionList.children);
+const submitButton   = quizMain.querySelector("#submit-button");
 
 let quizzes  = {};
 let currentQuiz = {};
 let quizScore = 0;
 let quizProgressValue = 1;
 let quizTopic = "";
+
+
+const markAsPicked = (event) => {
+    // prevents double execution of the function due to the connection of the input and the label
+    if (event.currentTarget.hasAttribute("data-picked")) {
+        return
+    }
+
+    // remvoe data-picked from option that have this attribute
+    mainOptions.forEach((option) => {
+        if (option.hasAttribute("data-picked") === "false") {
+            return
+        }
+
+        option.removeAttribute("data-picked");
+    })
+
+    event.currentTarget.setAttribute("data-picked", "");
+}
+const getQuizTopic = (event) => {
+    // prevent eventListener from running twice.
+    event.preventDefault()
+
+    quizTopic = event.currentTarget.getAttribute("data-quiz-option");
+    startQuizAbout(quizTopic)
+}
+const handleSubmitButton = () => {
+    const anyOptionPicked = mainOptions.some((option) => option.hasAttribute("data-picked"));
+    if (!anyOptionPicked) {
+        return;
+    }
+    
+    const optionInputElements = quizMain.querySelectorAll("input");
+
+    optionInputElements.forEach((input) => {
+        input.setAttribute("disabled", "true");
+    })
+
+    compareUserAnswer()
+}
 
 
 // load all quizzes to a variable
@@ -99,15 +140,47 @@ function getQuestionDetails(requestedDetail) {
 
 // mark correct and incorrect options
 function markCorrectAnswer(optionText, correctAnswer, optionElement) {
-    // set mark on label element for easier styling
-    const labelElement = optionElement.querySelector("label");
-
     if (optionText !== correctAnswer) {
-        labelElement.setAttribute("data-correct", "false"); 
+        optionElement.setAttribute("data-correct", "false"); 
         return
     }
 
-    labelElement.setAttribute("data-correct", "true"); 
+    optionElement.setAttribute("data-correct", "true"); 
+}
+
+
+// change status icon (correct / incorrect) inside given option element
+function changeCorrectIcon(option, status) {
+    const statusIconSrc = {
+        "correct": "icon-correct.svg",
+        "incorrect": "icon-incorrect.svg"
+    };
+
+    const statusIcon = option.querySelector(".option__status-indicator");
+    statusIcon.src += statusIconSrc[status];
+}
+
+
+// compare user answer with the correct one, show results
+function compareUserAnswer() {
+    const pickedOption = mainOptionList.querySelector("li[data-picked]");
+    
+    if (pickedOption.dataset.correct === "true") {
+        quizScore += 1;
+        pickedOption.classList.add("option-list__item--picked-correctly");
+        changeCorrectIcon(pickedOption, "correct");
+
+
+        
+    } else {
+        quizScore -= 1;
+        pickedOption.classList.add("option-list__item--picked-incorrectly");
+        changeCorrectIcon(pickedOption, "incorrect");
+
+        const correctOption = mainOptions.filter((option) => option.dataset.correct === "true")[0];
+        changeCorrectIcon(correctOption, "correct");
+    }
+
 }
 
 
@@ -132,10 +205,6 @@ function renderQuestionDetails() {
 }
 
 
-function handleOptionSelection(event) {
-}
-
-
 // reset quiz progress and start rendering quiz
 function startQuizAbout(topic) {
     currentQuiz = quizzes.filter(quiz => quiz["title"] === topic)[0];
@@ -150,17 +219,18 @@ function startQuizAbout(topic) {
 
 // handle quiz topic selection
 menuOptions.forEach((option) => {
-    option.addEventListener("click", (event) => {
-        // prevent eventListener from running twice.
-        event.preventDefault()
-
-        quizTopic = event.currentTarget.getAttribute("data-quiz-option");
-        startQuizAbout(quizTopic)
-    })
+    option.addEventListener("click", getQuizTopic);
 })
 
 
-// TODO: handle quiz answer selection via after submiting the answer
+// mark clicked option with special data attribute
+mainOptions.forEach((option) => {
+    option.addEventListener("click", markAsPicked);
+});
+
+
+// disable option selection after submiting (if any option was even picked)
+submitButton.addEventListener("click", handleSubmitButton);
 
 
 
