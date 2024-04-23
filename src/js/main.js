@@ -1,59 +1,16 @@
-const mainElement    = document.querySelector(".main");
-const headerElement  = document.querySelector(".header");
-const quizMenu       = mainElement.querySelector(".quiz-menu");
-const quizMain       = mainElement.querySelector(".quiz-main");
-const quizEnd        = mainElement.querySelector(".quiz-end");
-const menuOptionList = quizMenu.querySelector(".option-list");
-const mainOptionList = quizMain.querySelector(".option-list");
-const menuOptions    = Array.from(menuOptionList.children);
-const mainOptions    = Array.from(mainOptionList.children);
-const submitButton   = quizMain.querySelector("#submit-button");
+const mainElement      = document.querySelector(".main");
+const headerElement    = document.querySelector(".header");
+const quizMenu         = mainElement.querySelector(".quiz-menu");
+const quizMain         = mainElement.querySelector(".quiz-main");
+const quizEnd          = mainElement.querySelector(".quiz-end");
+const menuOptionList   = quizMenu.querySelector(".option-list");
+const answerOptionList = quizMain.querySelector(".option-list");
+const menuOptions      = Array.from(menuOptionList.children);
+const answerOptions    = Array.from(answerOptionList.children);
+const submitButton     = quizMain.querySelector("#submit-button");
 
-let quizzes  = {};
-let currentQuiz = {};
-let quizScore = 0;
-let quizProgressValue = 1;
-let quizTopic = "";
-
-
-const markAsPicked = (event) => {
-    // prevents double execution of the function due to the connection of the input and the label
-    if (event.currentTarget.hasAttribute("data-picked")) {
-        return
-    }
-
-    // remvoe data-picked from option that have this attribute
-    mainOptions.forEach((option) => {
-        if (option.hasAttribute("data-picked") === "false") {
-            return
-        }
-
-        option.removeAttribute("data-picked");
-    })
-
-    event.currentTarget.setAttribute("data-picked", "");
-}
-const getQuizTopic = (event) => {
-    // prevent eventListener from running twice.
-    event.preventDefault()
-
-    quizTopic = event.currentTarget.getAttribute("data-quiz-option");
-    startQuizAbout(quizTopic)
-}
-const handleSubmitButton = () => {
-    const anyOptionPicked = mainOptions.some((option) => option.hasAttribute("data-picked"));
-    if (!anyOptionPicked) {
-        return;
-    }
-    
-    const optionInputElements = quizMain.querySelectorAll("input");
-
-    optionInputElements.forEach((input) => {
-        input.setAttribute("disabled", "true");
-    })
-
-    compareUserAnswer()
-}
+let quizzes = {};
+let newQuiz;
 
 
 // load all quizzes to a variable
@@ -75,6 +32,47 @@ fetch("/data.json")
     })
 
 
+function Quiz(selectedTopic) {
+    this.currentQuizData = {};
+    this.quizScore = 0
+    this.quizProgressValue = 0;
+    this.quizTopic = selectedTopic;
+
+
+    this.startQuizAbout = () => {
+        this.currentQuizData = quizzes.filter(quiz => quiz["title"] === selectedTopic)[0];
+        this.quizScore = 0;
+        this.quizProgressValue = 1;
+
+        switchQuizFrame("main");
+        renderQuizDetails();
+    }
+
+    // return requested value from a question object
+    this.getQuizDetails = (requestedDetail) => {
+        const questionObject = this.currentQuizData["questions"][this.quizProgressValue];
+        const {question, options, answer} = questionObject;
+        const detailsMap = {
+            "question": question,
+            "options": options, 
+            "answer": answer
+        }
+    
+        if (requestedDetail in detailsMap === false) {
+            console.error("No such detail available");
+            return
+        }
+    
+        return detailsMap[requestedDetail];
+    }
+
+
+    this.getTopicIcon = () => {
+        return this.currentQuizData["icon"];
+    }
+}
+
+
 // switch to requested quiz frame / screen
 function switchQuizFrame(frameName) {
     const frameSelectors = {
@@ -92,17 +90,6 @@ function switchQuizFrame(frameName) {
 }
 
 
-// display amount questions left by text and progress bar
-function updateProgressIndificators() {
-    const quizProgressSpan = quizMain.querySelector("#question-index");
-    const quizProgressBar  = quizMain.querySelector("#quiz-progress");
-
-    quizProgressValue += 1;
-    quizProgressSpan = quizProgressValue;
-    quizProgressBar.value = quizProgressValue;
-}
-
-
 // display quiz topic in header and in the end screen
 function updateQuizTopicIndificators() {
     const quizTopicIndificators = document.querySelectorAll(".quiz-topic");
@@ -111,126 +98,85 @@ function updateQuizTopicIndificators() {
         const topicIcon = container.querySelector("img");
         const topicSpan = container.querySelector("span");
 
-        topicIcon.src=currentQuiz["icon"];
-        topicIcon.setAttribute("data-icon", quizTopic.toLowerCase());
+        topicIcon.src= newQuiz.getTopicIcon();
+        topicIcon.setAttribute("data-icon", newQuiz.quizTopic.toLowerCase());
 
-        topicSpan.textContent = quizTopic
+        topicSpan.textContent = newQuiz.quizTopic;
     })
 }
 
 
-// return requested value from a question object
-function getQuestionDetails(requestedDetail) {
-    const questionObject = currentQuiz["questions"][quizProgressValue];
-    const {question, options, answer} = questionObject;
-    const detailsMap = {
-        "question": question,
-        "options": options, 
-        "answer": answer
-    }
-
-    if (requestedDetail in detailsMap === false) {
-        console.error("No such detail available");
-        return
-    }
-
-    return detailsMap[requestedDetail];
-}
-
-
-// mark correct and incorrect options
-function markCorrectAnswer(optionText, correctAnswer, optionElement) {
-    if (optionText !== correctAnswer) {
-        optionElement.setAttribute("data-correct", "false"); 
-        return
-    }
-
-    optionElement.setAttribute("data-correct", "true"); 
-}
-
-
-// change status icon (correct / incorrect) inside given option element
-function changeCorrectIcon(option, status) {
-    const statusIconSrc = {
-        "correct": "icon-correct.svg",
-        "incorrect": "icon-incorrect.svg"
-    };
-
-    const statusIcon = option.querySelector(".option__status-indicator");
-    statusIcon.src += statusIconSrc[status];
-}
-
-
-// compare user answer with the correct one, show results
-function compareUserAnswer() {
-    const pickedOption = mainOptionList.querySelector("li[data-picked]");
-    
-    if (pickedOption.dataset.correct === "true") {
-        quizScore += 1;
-        pickedOption.classList.add("option-list__item--picked-correctly");
-        changeCorrectIcon(pickedOption, "correct");
-
-
-        
-    } else {
-        quizScore -= 1;
-        pickedOption.classList.add("option-list__item--picked-incorrectly");
-        changeCorrectIcon(pickedOption, "incorrect");
-
-        const correctOption = mainOptions.filter((option) => option.dataset.correct === "true")[0];
-        changeCorrectIcon(correctOption, "correct");
-    }
-
-}
-
-
 // render topic questions (text, options)
-function renderQuestionDetails() {
+function renderQuizDetails() {
+    updateQuizTopicIndificators();
+
     const questionText = quizMain.querySelector("#question-text");
-    const answerOptionList = quizMain.querySelector(".option-list");
-    const answerOptionElements = Array.from(answerOptionList.children);
+    questionText.textContent = newQuiz.getQuizDetails("question");
 
-    questionText.textContent = getQuestionDetails("question");
-    answerOptionElements.forEach((option) => {
-        const optionTextElement = option.querySelector("[data-option-text]");
-        const optionIndex       = answerOptionElements.indexOf(option);
-        const optionDetais      = getQuestionDetails("options");
+    answerOptions.forEach((answerOption) => {
+        const optionDetais      = newQuiz.getQuizDetails("options");
+        const correctAnswer     = newQuiz.getQuizDetails("answer");
+        const optionIndex       = answerOptions.indexOf(answerOption);
         const optionText        = optionDetais[optionIndex];
-        const correctAnswer     = getQuestionDetails("answer");
 
+        const optionTextElement = answerOption.querySelector("[data-option-text]");
         optionTextElement.textContent = optionText;
 
-        markCorrectAnswer(optionText, correctAnswer, option);
+        // mark the correct option for further checks
+        if (optionText === correctAnswer) {
+            answerOption.setAttribute("data-correct-option", "");
+        }
     });
 }
 
 
-// reset quiz progress and start rendering quiz
-function startQuizAbout(topic) {
-    currentQuiz = quizzes.filter(quiz => quiz["title"] === topic)[0];
-    quizScore = 0;
-    quizProgressValue = 1;
+// visually outline the option depending on its correctness
+function revealOptionStatus(optionElement, isCorrect, outlineOption) {
+    const statusIconPath = isCorrect ? "dist/img/icon-correct.svg" : "dist/img/icon-incorrect.svg";
+    const statusIcon = optionElement.querySelector(".option__status-indicator");
+    statusIcon.src = statusIconPath
 
-    switchQuizFrame("main");
-    updateQuizTopicIndificators();
-    renderQuestionDetails();
+    if (outlineOption) {
+        optionElement.classList.add(isCorrect ? "option-list__item--picked-correctly" : "option-list__item--picked-incorrectly");
+    }
 }
 
 
-// handle quiz topic selection
-menuOptions.forEach((option) => {
-    option.addEventListener("click", getQuizTopic);
+// starting quiz when topic selected in the menu 
+menuOptions.forEach((menuOption) => {
+    menuOption.addEventListener("click", (event) => {
+        event.preventDefault();
+
+        const selectedOption = event.currentTarget;
+        const selectedTopic  = selectedOption.getAttribute("data-option-topic");
+
+        newQuiz = new Quiz(selectedTopic);
+        newQuiz.startQuizAbout()
+    })
 })
 
 
-// mark clicked option with special data attribute
-mainOptions.forEach((option) => {
-    option.addEventListener("click", markAsPicked);
-});
+// answer submition, answer checking and results
+submitButton.addEventListener("click", (event) => {
+    event.currentTarget.textContent = "Next Question";
 
+    let pickedOption;
+    const correctOption = answerOptionList.querySelector("[data-correct-option]");
 
-// disable option selection after submiting (if any option was even picked)
-submitButton.addEventListener("click", handleSubmitButton);
+    answerOptions.forEach((answerOption) => {
+        const answerOptionInput = answerOption.querySelector("input")
+        if (answerOptionInput.checked) {
+            pickedOption = answerOption;
+        }
+        answerOptionInput.setAttribute("disabled", true);
+    })
 
-
-
+    const isCorrect = pickedOption.hasAttribute("data-correct-option");
+    revealOptionStatus(pickedOption, isCorrect, true);
+    
+    if (isCorrect) {
+        newQuiz.quizScore += 1;
+    } else {
+        revealOptionStatus(correctOption, true, false)
+    }
+})
