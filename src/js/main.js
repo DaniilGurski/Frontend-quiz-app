@@ -106,9 +106,39 @@ function updateQuizTopicIndificators() {
 }
 
 
+function updateProgressIndicators() {
+    const questionIndexElement = mainElement.querySelector("#question-index");
+    const progressBarElement   = mainElement.querySelector("#quiz-progress");
+
+    questionIndexElement.textContent = newQuiz.quizProgressValue;
+    progressBarElement.value = newQuiz.quizProgressValue;
+}
+
+
+// remove data attributes for styling, logic
+function resetOptions() {
+    const removeAttributes = ["data-pick", "data-correct-option", "data-revealed"]
+    answerOptions.forEach((answerOption) => {
+        const input = answerOption.querySelector("input"); 
+
+        input.removeAttribute("disabled"); 
+
+        if (input.checked) {
+            input.checked = false;
+        }
+
+        removeAttributes.forEach((attribute) => {
+            if (answerOption.hasAttribute(attribute)) {
+                answerOption.removeAttribute(attribute);
+            }
+        })
+    })
+}
+
+
 // render topic questions (text, options)
 function renderQuizDetails() {
-    updateQuizTopicIndificators();
+    updateProgressIndicators();
 
     const questionText = quizMain.querySelector("#question-text");
     questionText.textContent = newQuiz.getQuizDetails("question");
@@ -132,12 +162,13 @@ function renderQuizDetails() {
 
 // visually outline the option depending on its correctness
 function revealOptionStatus(optionElement, isCorrect, outlineOption) {
+    optionElement.setAttribute("data-revealed", "")
     const statusIconPath = isCorrect ? "dist/img/icon-correct.svg" : "dist/img/icon-incorrect.svg";
     const statusIcon = optionElement.querySelector(".option__status-indicator");
     statusIcon.src = statusIconPath
 
     if (outlineOption) {
-        optionElement.classList.add(isCorrect ? "option-list__item--picked-correctly" : "option-list__item--picked-incorrectly");
+        optionElement.dataset.pick = isCorrect ? "correct" : "incorrect";
     }
 }
 
@@ -152,13 +183,25 @@ menuOptions.forEach((menuOption) => {
 
         newQuiz = new Quiz(selectedTopic);
         newQuiz.startQuizAbout()
+        updateQuizTopicIndificators();
     })
 })
 
 
 // answer submition, answer checking and results
+// TODO: make prettier
 submitButton.addEventListener("click", (event) => {
-    event.currentTarget.textContent = "Next Question";
+    if (submitButton.dataset.action === "next") {
+        submitButton.setAttribute("data-action", "submit");
+        newQuiz.quizProgressValue += 1;
+        resetOptions();
+        renderQuizDetails();
+        return;
+    }
+    
+    submitButton.setAttribute("data-action", "next");
+    submitButton.textContent = "Next Question";
+
 
     let pickedOption;
     const correctOption = answerOptionList.querySelector("[data-correct-option]");
