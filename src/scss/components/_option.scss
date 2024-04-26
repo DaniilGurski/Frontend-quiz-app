@@ -1,7 +1,9 @@
 @use "../abstracts/" as *;
 
+
 // change in dark mode: bg color, text color
 .option {
+
     --_option-box-shadow-color: var(--option-box-shadow-color, hsla(220, 29%, 66%, 50%));
     --_icon-bg-color: var(--icon-bg-color, #{$clr-light-gray});
     --_icon-text-color: var(--icon-text-color, currentColor);
@@ -48,29 +50,14 @@
     }
 
 
-    // mark with green if picked correctly
-    &--picked-correctly {
-        --icon-bg-color: #{$clr-green};
-        --icon-text-color: #{$clr-pure-white};
-        outline-color: $clr-green;
-    }
-
-
-    // mark with red if picked incorrectly
-    &--picked-incorrectly {
-        --icon-bg-color: #{$clr-red};
-        --icon-text-color: #{$clr-pure-white};
-        outline-color: $clr-red;
-    }
-
-
     // TODO: make width smaller on desktops so padding is not that large ? 
     &__marker {
-        display: grid;
-        place-items: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
 
         width: 2.5em;
-        padding: 0.25rem;
+        padding: 0.625rem;
         aspect-ratio: 1;
 
         color: var(--_icon-text-color);
@@ -81,12 +68,37 @@
 
 
     &__main {
-        @include flex(1em);
+        // ensure that marker stays the same size regardless of the length of the text
+        display: grid;
+        grid-template-columns: auto 1fr;
         align-items: center;
     }
 
 
-    &__state-indicator {
+    &__status-indicator {
+        visibility: hidden;
         width: 2em;
     }
+
+}
+
+
+.option-list__item {
+    &[data-pick=correct] .option {
+        --icon-bg-color: #{$clr-green};
+        --icon-text-color: #{$clr-pure-white};
+        outline-color: $clr-green;
+    }
+
+    &[data-pick=incorrect] .option {
+        --icon-bg-color: #{$clr-red};
+        --icon-text-color: #{$clr-pure-white};
+        outline-color: $clr-red;
+    }
+
+    
+    &[data-revealed] .option__status-indicator {
+        visibility: visible;
+    }
+
 }

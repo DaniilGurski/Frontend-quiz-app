@@ -3,13 +3,15 @@
 $icon-background-colors: (
     "html": hsl(22, 100%, 96%),
     "css" : hsl(151, 88%, 94%),
-    "js": hsl(225, 100%, 96%),
+    "javascript": hsl(225, 100%, 96%),
     "accessibility": hsl(278, 100%, 95%)
 );
 
 .topic-icon {
-    width: 3.5rem;
+    --_topic-icon-size: var(--topic-icon-size, 3rem);
+    width: var(--_topic-icon-size);
     aspect-ratio: 1;
+
     padding: rem(10);
     border-radius: rem(12);
 
@@ -19,8 +21,8 @@ $icon-background-colors: (
     &[data-icon=css] {
         background: map-get($icon-background-colors, "css");
     }
-    &[data-icon=js] {
-        background: map-get($icon-background-colors, "js");
+    &[data-icon=javascript] {
+        background: map-get($icon-background-colors, "javascript");
     }
     &[data-icon=accessibility] {
         background: map-get($icon-background-colors, "accessibility");

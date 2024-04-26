@@ -21,11 +21,14 @@ body {
     font-family: $primary-font-family;
     font-size: $font-size-base;
 
+
+    // TODO: move to seperate file ? 
     &.dark-mode {
         background-image: url("/dist/img/pattern-background-mobile-dark.svg");
     }
 
     @include media-query($medium-screen-size) {
+        --topic-icon-size: 4rem;
         --padding-200: #{rem(32)};
         --padding-300: #{rem(48)};
 
@@ -68,7 +71,7 @@ body {
         @include grid(rem(24));
         align-content: space-between;
     }
-
+    
     // div container with questions left span and question itself
     &__header > :first-child {
         @include grid(rem(12));
@@ -76,8 +79,8 @@ body {
     
     @include media-query($medium-screen-size) {
         &__header {
-            height: 80%;
             gap: rem(40);
+            height: 80%;
         }
 
         &__header > :first-child {
@@ -94,8 +97,7 @@ body {
     
     &__score {
         display: grid;
-        justify-content: center;
-        text-align: center;
+        justify-items: center;
 
         padding: var(--_padding-300);
         background-color: var(--_primary-color);
@@ -130,6 +132,18 @@ body {
 
     @include media-query($medium-screen-size) {
         --option-gap: #{em(24)};
+    }
+
+
+    &__submit-section {
+        display: grid;
+        justify-items: center;
+    }
+
+
+    &__error-message {
+        display: flex;
+        color: $clr-red;
     }
 }
 

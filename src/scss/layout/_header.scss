@@ -45,10 +45,15 @@
         /* light version of mode icons (dark mode)*/ 
         .dark-mode &:first-child {
             background: url("/dist/img/icon-sun-light.svg");
+            background-repeat: no-repeat;
+            background-size: cover;
+
         }
 
         .dark-mode &:last-child {
             background: url("/dist/img/icon-moon-light.svg");
+            background-repeat: no-repeat;
+            background-size: cover;
         }
     }
 }

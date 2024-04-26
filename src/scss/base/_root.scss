@@ -1,6 +1,8 @@
 @use "../abstracts/" as *;
+@use "../utils/" as *;
 
 :root {
     @include convert_colors();
     @include convert_typography();
 }
+
