@@ -40,8 +40,8 @@
         </header>
         
         <div class="option-container">
-          <ul class="option-list" id="menu-option-list"> 
-            <li data-quiz-option="HTML">
+          <ul class="option-list"> 
+            <li data-option-topic="HTML">
               <label class="option">
                 <input class="visually-hidden" type="radio" name="option-check" id="">
 
@@ -50,10 +50,10 @@
                     <p> HTML </p>
                 </div>
 
-                <img class="option__state-indicator hidden" src="" alt="">
+                <img class="option__status-indicator hidden" src="" alt="">
               </label>
             </li>
-            <li data-quiz-option="CSS">
+            <li data-option-topic="CSS">
               <label class="option">
                 <input class="visually-hidden" type="radio" name="option-check" id="">
 
@@ -63,17 +63,17 @@
                 </div>
               </label>
             </li>
-            <li data-quiz-option="JavaScript">
+            <li data-option-topic="JavaScript">
               <label class="option">
                 <input class="visually-hidden" type="radio" name="option-check" id="">
 
                 <div class="option__main">
-                    <img class="topic-icon" src="dist/img/icon-js.svg" alt="" data-icon="js">
+                    <img class="topic-icon" src="dist/img/icon-js.svg" alt="" data-icon="javascript">
                     <p> JavaScript </p>
                 </div>
               </label>
             </li>
-            <li data-quiz-option="Accessibility">
+            <li data-option-topic="Accessibility">
               <label class="option">
                 <input class="visually-hidden" type="radio" name="option-check" id="">
 
@@ -97,14 +97,14 @@
             </p>
           </div>
 
-          <progress class="quiz-progress" id="quiz-progress" value="1" max="8">
+          <progress class="quiz-progress" id="quiz-progress" value="1" max="10">
           </progress>
         </header>
 
         <div class="option-container">
           <div>
             <ul class="option-list"> 
-              <li>
+              <li class="option-list__item">
                 <label class="option">
                   <input class="visually-hidden" type="radio" name="option-check">
 
@@ -113,10 +113,10 @@
                     <p data-option-text> Option </p>
                   </div>
 
-                  <img class="option__state-indicator hidden" src="dist/img/" alt="">
+                  <img class="option__status-indicator" src="dist/img/" alt="">
                 </label>
               </li>
-              <li>
+              <li class="option-list__item">
                 <label class="option">
                   <input class="visually-hidden" type="radio" name="option-check">
 
@@ -125,10 +125,10 @@
                     <p data-option-text> Option </p>
                   </div>
 
-                  <img class="option__state-indicator hidden" src="dist/img/" alt="">
+                  <img class="option__status-indicator" src="dist/img/" alt="">
                 </label>
               </li>
-              <li>
+              <li class="option-list__item">
                 <label class="option">
                   <input class="visually-hidden" type="radio" name="option-check">
 
@@ -137,10 +137,10 @@
                     <p data-option-text> Option </p>
                   </div>
 
-                  <img class="option__state-indicator hidden" src="dist/img/" alt="">
+                  <img class="option__status-indicator" src="dist/img/" alt="">
                 </label>
               </li>
-              <li>
+              <li class="option-list__item">
                 <label class="option">
                   <input class="visually-hidden" type="radio" name="option-check">
 
@@ -149,11 +149,20 @@
                     <p data-option-text> Option </p>
                   </div>
 
-                  <img class="option__state-indicator hidden" src="dist/img/" alt="">
+                  <img class="option__status-indicator" src="dist/img/" alt="">
                 </label>
               </li>
             </ul>
-            <button class="button" id="progress-button">Submit Answer</button>
+
+            <div class="option-container__submit-section">
+              <button class="button" id="submit-button" data-action="submit">Submit Answer</button>
+
+              <p class="option-container__error-message hidden" id="error-message" role="alert" aria-live="assertive"> 
+                <img src="dist/img/icon-error.svg" alt="">
+                Please select an answer
+              </p>
+            </div>
+
             </div>
         </div>
       </article>
@@ -169,10 +178,10 @@
             </div>
 
             <span class="fs-display" id="quiz-score"> [number] </span>
-            <p>out of <span id="question-number"> [number] </span> </p>
+            <p>out of <span id="quiz-length"> [number] </span> </p>
           </div>
 
-          <button class="button" id="play-again-btn">Play Again</button>
+          <button class="button" id="play-again-button">Play Again</button>
         </div>
       </article>
     </main>
