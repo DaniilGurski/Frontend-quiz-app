@@ -8,6 +8,7 @@ const answerOptionList = quizMain.querySelector(".option-list");
 const menuOptions      = Array.from(menuOptionList.children);
 const answerOptions    = Array.from(answerOptionList.children);
 const submitButton     = quizMain.querySelector("#submit-button");
+const playAgainButton  = quizEnd.querySelector("#play-again-button");
 
 let quizzes = {};
 let newQuiz;
@@ -45,17 +46,22 @@ function Quiz(selectedTopic) {
         this.quizProgressValue = 1;
 
         switchQuizFrame("main");
+        resetOptions();
         renderQuizDetails();
     }
 
     // return requested value from a question object
     this.getQuizDetails = (requestedDetail) => {
-        const questionObject = this.currentQuizData["questions"][this.quizProgressValue];
+        const questionArray = this.currentQuizData["questions"];
+        console.log(questionArray);
+
+        const questionObject = questionArray[this.quizProgressValue];
         const {question, options, answer} = questionObject;
         const detailsMap = {
             "question": question,
             "options": options, 
-            "answer": answer
+            "answer": answer,
+            "quiz-length": questionArray.length
         }
     
         if (requestedDetail in detailsMap === false) {
@@ -106,12 +112,23 @@ function updateQuizTopicIndificators() {
 }
 
 
+// sets visual topic marker in header and ending frame
 function updateProgressIndicators() {
     const questionIndexElement = mainElement.querySelector("#question-index");
     const progressBarElement   = mainElement.querySelector("#quiz-progress");
 
     questionIndexElement.textContent = newQuiz.quizProgressValue;
     progressBarElement.value = newQuiz.quizProgressValue;
+}
+
+
+// TODO: Move to render quiz details function ?
+function renderEndingFrame() {
+    const quizScoreElement = quizEnd.querySelector("#quiz-score");
+    const quizLengthElement = quizEnd.querySelector("#quiz-length");
+
+    quizScoreElement.textContent = newQuiz.quizScore;
+    quizLengthElement.textContent = newQuiz.getQuizDetails("quiz-length");
 }
 
 
@@ -160,6 +177,18 @@ function renderQuizDetails() {
 }
 
 
+// returns true when next answer submition compleates the quiz
+function isQuizCompleated() {
+    const quizLength = newQuiz.getQuizDetails("quiz-length");
+    const currentProgress = newQuiz.quizProgressValue;
+
+    if (currentProgress + 1 === quizLength) {
+        return true
+    }
+    return false
+}
+
+
 // visually outline the option depending on its correctness
 function revealOptionStatus(optionElement, isCorrect, outlineOption) {
     optionElement.setAttribute("data-revealed", "")
@@ -191,13 +220,31 @@ menuOptions.forEach((menuOption) => {
 // answer submition, answer checking and results
 // TODO: make prettier
 submitButton.addEventListener("click", (event) => {
+    const errorMessage = quizMain.querySelector("#error-message");
+    const isOptionPicked = answerOptionList.querySelector("input:checked");
+    errorMessage.classList.toggle("hidden", isOptionPicked)
+
+
+    if (!isOptionPicked) {
+        return
+    }
+    
+
     if (submitButton.dataset.action === "next") {
+        const quizCompleated = isQuizCompleated();
+
+        if (quizCompleated) {
+            switchQuizFrame("end");
+            renderEndingFrame();
+            return
+        }
+
         submitButton.setAttribute("data-action", "submit");
         newQuiz.quizProgressValue += 1;
         resetOptions();
         renderQuizDetails();
         return;
-    }
+    } 
     
     submitButton.setAttribute("data-action", "next");
     submitButton.textContent = "Next Question";
@@ -222,4 +269,9 @@ submitButton.addEventListener("click", (event) => {
     } else {
         revealOptionStatus(correctOption, true, false)
     }
+})
+
+
+playAgainButton.addEventListener("click", (event) => {
+    switchQuizFrame("menu")
 })
