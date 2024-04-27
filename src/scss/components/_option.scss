@@ -3,7 +3,6 @@
 
 // change in dark mode: bg color, text color
 .option {
-
     --_option-box-shadow-color: var(--option-box-shadow-color, hsla(220, 29%, 66%, 50%));
     --_icon-bg-color: var(--icon-bg-color, #{$clr-light-gray});
     --_icon-text-color: var(--icon-text-color, currentColor);
@@ -27,6 +26,7 @@
     outline: 5px solid transparent;
 
     cursor: pointer;
+
 
     .dark-mode & {
         --option-box-shadow-color: #{$clr-navy};
@@ -96,9 +96,7 @@
         outline-color: $clr-red;
     }
 
-    
     &[data-revealed] .option__status-indicator {
         visibility: visible;
     }
-
 }
