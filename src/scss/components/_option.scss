@@ -41,7 +41,6 @@
     }
 
 
-    // TODO: create a mixin for outline ? 
     // active option
     &:has(:checked) {
         --icon-bg-color: #{$clr-purple};
@@ -49,8 +48,7 @@
         outline-color: $clr-purple;
     }
 
-
-    // TODO: make width smaller on desktops so padding is not that large ? 
+    
     &__marker {
         display: flex;
         justify-content: center;

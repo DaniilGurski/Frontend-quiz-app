@@ -229,6 +229,12 @@ h1 {
   gap: var(--gap, 1rem);
 }
 
+.small-text {
+  font-size: var(--fs-100);
+  color: var(--_small-text-color);
+  font-style: italic;
+}
+
 :root {
   --clr-purple-100: hsl(277, 91%, 56%);
   --clr-navy-300: hsl(216, 25%, 25%);
@@ -377,12 +383,6 @@ body.dark-mode {
 .option-container__error-message {
   display: flex;
   color: var(--clr-red-600);
-}
-
-.small-text {
-  font-size: var(--fs-100);
-  color: var(--_small-text-color);
-  font-style: italic;
 }
 
 /* HEADER */

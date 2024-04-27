@@ -1,0 +1,7 @@
+@use "../abstracts/" as *;
+
+.small-text {
+    font-size: $font-size-smallest;
+    color: var(--_small-text-color);
+    font-style: italic;
+}

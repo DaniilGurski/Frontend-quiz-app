@@ -7,7 +7,6 @@ body {
     --_small-text-color: var(--small-text-color, #{$clr-light-navy});
     --_primary-color: var(--primary-color, #{$clr-pure-white});
 
-    // TODO: make padding scss map and scss variables ? 
     --_padding-100: var(--padding-100, #{rem(12)});
     --_padding-200: var(--padding-200, #{rem(16)});
     --_padding-300: var(--padding-300, #{rem(32)});
@@ -20,9 +19,7 @@ body {
     color: var(--_body-text-color);
     font-family: $primary-font-family;
     font-size: $font-size-base;
-
-
-    // TODO: move to seperate file ? 
+    
     &.dark-mode {
         background-image: url("/dist/img/pattern-background-mobile-dark.svg");
     }
@@ -145,12 +142,4 @@ body {
         display: flex;
         color: $clr-red;
     }
-}
-
-
-// TODO: move to seperate file like "text-utils" ?
-.small-text {
-    font-size: $font-size-smallest;
-    color: var(--_small-text-color);
-    font-style: italic;
 }
