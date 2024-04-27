@@ -122,8 +122,8 @@ function updateProgressIndicators() {
     const questionIndexElement = mainElement.querySelector("#question-index");
     const progressBarElement   = mainElement.querySelector("#quiz-progress");
 
-    questionIndexElement.textContent = newQuiz.quizProgressValue;
-    progressBarElement.value = newQuiz.quizProgressValue;
+    questionIndexElement.textContent = newQuiz.quizProgressValue + 1;
+    progressBarElement.value = newQuiz.quizProgressValue + 1;
 }
 
 
